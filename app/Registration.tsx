@@ -1,20 +1,13 @@
 import React, { useState } from "react";
 import { Text, View, TextInput, Button, StyleSheet, Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../types/types"; // Import the type
-import { StackNavigationProp } from "@react-navigation/stack"; // Import the type for stack navigation
 
-// Define the navigation prop type using the RootStackParamList
-type NavigationProp = StackNavigationProp<RootStackParamList, "Login">;
-
-export default function Index() {
+export default function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigation = useNavigation<NavigationProp>(); // Use the typed navigation
 
-  const handleLogin = async () => {
+  const handleRegistration = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/v1/auth/login", {
+      const response = await fetch("http://localhost:4000/api/v1/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,9 +18,9 @@ export default function Index() {
       const data = await response.json();
 
       if (response.ok) {
-        Alert.alert("Login successful", `Welcome ${data.user.name}`);
+        Alert.alert("Registration successful", "You can now log in.");
       } else {
-        Alert.alert("Login failed", data.message || "Something went wrong.");
+        Alert.alert("Registration failed", data.message || "Something went wrong.");
       }
     } catch (error) {
       console.error(error);
@@ -37,7 +30,7 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Login</Text>
+      <Text style={styles.header}>Register</Text>
       <TextInput
         style={styles.input}
         placeholder="Email"
@@ -51,11 +44,7 @@ export default function Index() {
         value={password}
         onChangeText={setPassword}
       />
-      <Button title="Login" onPress={handleLogin} />
-      <Button
-        title="Don't have an account? Register"
-        onPress={() => navigation.navigate("Registration")}
-      />
+      <Button title="Register" onPress={handleRegistration} />
     </View>
   );
 }
