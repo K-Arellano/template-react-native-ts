@@ -7,7 +7,7 @@ export default function Registration() {
 
   const handleRegistration = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/v1/auth/register", {
+      const response = await fetch("http://192.168.254.176:4000/api/v1/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export default function Registration() {
       const data = await response.json();
 
       if (response.ok) {
-        Alert.alert("Registration successful", "You can now log in.");
+        Alert.alert("Registration successful", "Please check your email to verify your account.");
       } else {
         Alert.alert("Registration failed", data.message || "Something went wrong.");
       }

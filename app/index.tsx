@@ -7,14 +7,14 @@ import { StackNavigationProp } from "@react-navigation/stack"; // Import the typ
 // Define the navigation prop type using the RootStackParamList
 type NavigationProp = StackNavigationProp<RootStackParamList, "Login">;
 
-export default function Index() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation<NavigationProp>(); // Use the typed navigation
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/v1/auth/login", {
+      const response = await fetch("http://192.168.254.176:4000/api/v1/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
